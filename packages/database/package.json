@@ -1,1 +1,5 @@
-{"name":"@sptp/database","private":true,"type":"module"}
+{
+	"name": "@sptp/database",
+	"private": true,
+	"type": "module"
+}

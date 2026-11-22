@@ -18,7 +18,8 @@
     "format": "biome format --write apps packages scripts tests",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "api:local": "tsx --env-file-if-exists=.env --env-file=.local/db.env apps/api/src/node.ts"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.3.0",

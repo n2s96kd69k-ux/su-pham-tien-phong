@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./tests',testMatch:'**/*.spec.ts',workers:1,use:{baseURL:'http://127.0.0.1:5180',launchOptions:{executablePath:process.env.CHROMIUM_PATH||undefined},screenshot:'only-on-failure'},projects:[{name:'desktop',use:{viewport:{width:1366,height:900}}},{name:'mobile',use:{viewport:{width:375,height:812},isMobile:true,hasTouch:true}}],webServer:{command:'pnpm exec tsx tests/browser-server.ts',url:'http://127.0.0.1:5180',timeout:90000,gracefulShutdown:{signal:'SIGTERM',timeout:5000}}});
