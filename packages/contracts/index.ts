@@ -31,6 +31,7 @@ export interface CatalogItem {
 	version: number;
 }
 export interface Lesson extends CatalogItem {
+	sample: boolean;
 	body: z.infer<typeof lessonBody>;
 	exams: { id: string; title: string; minutes: number; count: number }[];
 }

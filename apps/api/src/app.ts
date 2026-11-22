@@ -84,7 +84,7 @@ export function createApp(services: Services) {
 	app.get("/lessons/:id", async (c) => {
 		const sql = db();
 		const [row] =
-			await sql`SELECT v.id,v.title,v.version,v.body,c.subject,c.title AS course FROM content_versions v JOIN courses c ON v.course_id=c.id WHERE v.id=${id(c.req.param("id"))} AND v.state='published' AND v.kind='lesson'`;
+			await sql`SELECT v.id,v.title,v.version,v.body,(v.author IS NULL) AS sample,c.subject,c.title AS course FROM content_versions v JOIN courses c ON v.course_id=c.id WHERE v.id=${id(c.req.param("id"))} AND v.state='published' AND v.kind='lesson'`;
 		if (!row) throw new HTTPException(404);
 		const exams =
 			await sql`SELECT e.id,e.title,e.minutes,count(i.position)::int AS count FROM exams e JOIN exam_items i ON i.exam_id=e.id WHERE lesson_id=${row.id} AND e.sealed GROUP BY e.id ORDER BY e.created_at`;

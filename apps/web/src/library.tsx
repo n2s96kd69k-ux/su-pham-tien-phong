@@ -57,7 +57,7 @@ export function Catalog() {
 						<h2>Bài học đã xuất bản</h2>
 					</div>
 					<label className="search">
-						<span aria-hidden="true">⌕</span>
+						<span className="search-icon" aria-hidden="true" />
 						<input
 							id="search"
 							aria-label="Tìm bài học"
@@ -81,7 +81,7 @@ export function Catalog() {
 								</small>
 								<h3>{l.title}</h3>
 							</div>
-							<span className="row-arrow">↗</span>
+							<span className="row-arrow" aria-hidden="true" />
 						</Link>
 					))
 				) : (
@@ -104,6 +104,7 @@ export function Reader({ signed }: { signed: boolean }) {
 			<PageTop>{l.title}</PageTop>
 			<p className="meta">
 				{l.subject} · {l.course} · Phiên bản {l.version}
+				{l.sample && " · Học liệu minh họa do dự án biên soạn"}
 			</p>
 			<section className="objective">
 				<h2>Mục tiêu bài học</h2>

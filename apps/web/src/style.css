@@ -485,3 +485,31 @@ footer.wrap {
 .account span {
 	font-family: system-ui, sans-serif;
 }
+
+.row-arrow {
+	width: 11px;
+	height: 11px;
+	border: solid var(--green);
+	border-width: 1.5px 1.5px 0 0;
+	transform: rotate(45deg);
+	margin-right: 8px;
+	flex-shrink: 0;
+}
+.search-icon {
+	width: 15px;
+	height: 15px;
+	border: 1.5px solid var(--muted);
+	border-radius: 50%;
+	position: relative;
+	flex-shrink: 0;
+}
+.search-icon::after {
+	content: "";
+	position: absolute;
+	width: 7px;
+	height: 1.5px;
+	background: var(--muted);
+	right: -5px;
+	bottom: -2px;
+	transform: rotate(45deg);
+}

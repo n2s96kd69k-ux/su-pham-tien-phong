@@ -155,7 +155,7 @@ function Workspace({ identity }: { identity: string | null | undefined }) {
 						</Action>
 					) : (
 						<Link className="account" to="/login">
-							Đăng nhập <span aria-hidden="true">↗</span>
+							Đăng nhập
 						</Link>
 					)}
 				</div>

@@ -195,7 +195,7 @@ export function Progress() {
 					{data.lessons.length ? (
 						data.lessons.map((l) => (
 							<Link className="list-link" key={l.id} to={`/lessons/${l.id}`}>
-								{l.title} ↗
+								{l.title}
 							</Link>
 						))
 					) : (
