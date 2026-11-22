@@ -1,0 +1,515 @@
+* {
+	box-sizing: border-box;
+}
+:root {
+	--ink: #182f2d;
+	--muted: #536864;
+	--green: #174f45;
+	--line: #cbd1c5;
+	--paper: #f8f7ef;
+	--serif: "Newsreader", Georgia, serif;
+}
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font:
+		16px / 1.65 "Be Vietnam Pro",
+		system-ui,
+		sans-serif;
+}
+a {
+	color: var(--green);
+}
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+button,
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+	min-height: 44px;
+	padding: 10px 18px;
+	border: 1px solid var(--green);
+	background: var(--green);
+	color: white;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-decoration: none;
+	cursor: pointer;
+}
+button:disabled {
+	cursor: default;
+	opacity: 0.64;
+}
+button:hover:not(:disabled),
+.btn:hover {
+	filter: brightness(1.12);
+}
+:focus-visible {
+	outline: 3px solid #b16c15;
+	outline-offset: 3px;
+}
+.wrap {
+	width: min(calc(100% - 64px), 1180px);
+	margin: auto;
+}
+header {
+	border-bottom: 1px solid var(--line);
+}
+.head {
+	display: flex;
+	align-items: center;
+	gap: 36px;
+	min-height: 83px;
+}
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	text-decoration: none;
+	font:
+		600 18px / 1.1 "Be Vietnam Pro",
+		sans-serif;
+	letter-spacing: -0.8px;
+}
+.mark {
+	display: grid;
+	place-items: center;
+	background: var(--green);
+	color: #e7e5be;
+	width: 41px;
+	height: 45px;
+	border-radius: 13px 2px 13px 2px;
+	font: 32px var(--serif);
+}
+nav {
+	display: flex;
+	gap: 28px;
+	margin-left: auto;
+}
+nav a,
+.account {
+	text-decoration: none;
+	color: var(--muted);
+	font-size: 0.88rem;
+	font-weight: 600;
+}
+nav a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+}
+nav a.active {
+	box-shadow: inset 0 -2px var(--green);
+	color: var(--green);
+}
+.account,
+.plain {
+	background: transparent;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	padding: 10px 14px;
+	color: var(--green);
+}
+main {
+	min-height: 70vh;
+	padding: 34px 0 64px;
+}
+.hero {
+	display: grid;
+	grid-template-columns: 1.15fr 1fr;
+	gap: 7%;
+	align-items: center;
+	background: #194c43;
+	color: #fffcf0;
+	border-radius: 6px;
+	padding: 54px clamp(28px, 5vw, 72px);
+}
+h1,
+h2,
+h3 {
+	font-family: var(--serif);
+	font-weight: 400;
+	line-height: 1.12;
+	letter-spacing: -0.035em;
+	margin: 0 0 0.4em;
+}
+h1 {
+	font-size: clamp(42px, 5.4vw, 78px);
+}
+h2 {
+	font-size: clamp(29px, 3.1vw, 44px);
+}
+h3 {
+	font-size: clamp(23px, 2.4vw, 32px);
+}
+.hero h1 {
+	font-size: clamp(54px, 6vw, 88px);
+	margin: 0;
+}
+.hero h1 em {
+	color: #d6e4ae;
+}
+.hero p:not(.eyebrow) {
+	max-width: 30em;
+	color: #eff1df;
+}
+.eyebrow {
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	font-size: 0.71rem;
+	font-weight: 600;
+	margin: 0 0 20px;
+}
+.hero .eyebrow {
+	color: #dae3cb;
+}
+.cream {
+	background: #edf0d2;
+	color: var(--green);
+	border: 0;
+	margin-top: 8px;
+}
+.visual {
+	margin: 0;
+	color: #20382c;
+	background: #e7e7bd;
+	padding: 24px 30px 18px;
+	border: 1px solid #eeefcc;
+	box-shadow: 7px 8px 0 #113d36;
+	transform: rotate(-2deg);
+}
+.visual figcaption {
+	font: 30px / 1.1 var(--serif);
+}
+.visual small {
+	display: block;
+	font:
+		12px / 2 "Be Vietnam Pro",
+		sans-serif;
+	color: #3d5647;
+}
+.bars {
+	margin-top: 24px;
+	display: flex;
+	justify-content: space-around;
+	align-items: end;
+	background: repeating-linear-gradient(
+		to top,
+		transparent 0 29px,
+		#c4cfaa 29px 30px
+	);
+	padding: 0 8px;
+}
+.bars > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 22%;
+	gap: 1px;
+}
+.bars i {
+	width: 100%;
+	background: #527561;
+	border-top: 3px solid #315c4b;
+}
+.bars > div:nth-child(2) i {
+	background: #ab633f;
+	border-color: #754225;
+}
+.bars span {
+	white-space: nowrap;
+	font-size: 0.73rem;
+	padding: 4px;
+	background: #e7e7bd;
+}
+.index {
+	padding-top: 48px;
+}
+.section-head {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+.section-head h2 {
+	margin: 0;
+}
+.section-head .eyebrow {
+	color: var(--muted);
+	margin: 0 0 8px;
+}
+.search {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border: 1px solid var(--line);
+	background: white;
+	padding: 0 12px;
+	border-radius: 4px;
+}
+.search input {
+	border: none;
+	width: 200px;
+}
+.library-row {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 24px 4px;
+	border-top: 1px solid var(--line);
+	text-decoration: none;
+}
+.library-row:last-child {
+	border-bottom: 1px solid var(--line);
+}
+.library-row h3 {
+	margin: 0.2em 0 0;
+}
+.library-row small,
+.meta,
+footer {
+	color: var(--muted);
+}
+.book-icon {
+	background: #e3e9d8;
+	color: #4c6650;
+	width: 64px;
+	height: 71px;
+	display: grid;
+	place-items: center;
+	font: 40px var(--serif);
+	border-left: 5px solid #849d7d;
+}
+.row-arrow {
+	margin-left: auto;
+	font-size: 24px;
+}
+.reader {
+	max-width: 800px;
+	margin: 0 auto;
+}
+.back {
+	font-size: 0.88rem;
+	display: inline-block;
+	margin: 4px 0 24px;
+}
+.reader > h2 {
+	margin-top: 36px;
+}
+.reader p {
+	overflow-wrap: anywhere;
+}
+.paper,
+.objective {
+	padding: 26px;
+	margin: 24px 0;
+	background: #fff;
+	border: 1px solid var(--line);
+	border-radius: 5px;
+}
+.objective {
+	background: #e8eddd;
+	border-left: 4px solid var(--green);
+}
+details {
+	border-bottom: 1px solid var(--line);
+	padding: 14px 0;
+}
+summary {
+	cursor: pointer;
+	font-weight: 600;
+	min-height: 36px;
+}
+input:not([type="radio"]):not([type="checkbox"]),
+textarea,
+select {
+	display: block;
+	border: 1px solid #99aaa0;
+	padding: 10px;
+	background: white;
+	border-radius: 3px;
+	width: 100%;
+	color: var(--ink);
+}
+.search input:not([type]) {
+	border: 0;
+}
+textarea {
+	min-height: 90px;
+}
+label {
+	display: block;
+	margin-bottom: 12px;
+}
+.search {
+	margin: 0;
+}
+.exam-status,
+.list-link {
+	display: flex;
+	padding: 14px 0;
+	gap: 20px;
+	border-bottom: 1px solid var(--line);
+}
+fieldset {
+	margin: 20px 0;
+	padding: 16px;
+	border: 1px solid var(--line);
+}
+legend {
+	font-weight: 600;
+}
+.option {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-height: 44px;
+	background: white;
+	padding: 8px 12px;
+	border: 1px solid var(--line);
+	border-radius: 3px;
+}
+.notice {
+	background: #e8eddd;
+	padding: 14px;
+}
+.error {
+	color: #772d21;
+	background: #f6e6dc;
+}
+.skip {
+	position: absolute;
+	left: -9999px;
+}
+.skip:focus {
+	left: 1em;
+	top: 1em;
+	background: white;
+	padding: 6px;
+	z-index: 2;
+}
+footer.wrap {
+	border-top: 1px solid var(--line);
+	padding: 22px 0;
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8rem;
+}
+@media (max-width: 720px) {
+	.wrap {
+		width: calc(100% - 32px);
+	}
+	.head {
+		flex-wrap: wrap;
+		gap: 8px;
+		padding: 12px 0 0;
+	}
+	.brand {
+		font-size: 16px;
+	}
+	.mark {
+		width: 36px;
+		height: 38px;
+	}
+	.account {
+		margin-left: auto;
+	}
+	nav {
+		order: 3;
+		flex-basis: 100%;
+		gap: 20px;
+	}
+	.hero {
+		padding: 28px 22px;
+		grid-template-columns: 1fr;
+		gap: 22px;
+	}
+	.visual {
+		transform: none;
+		margin: 0;
+		padding: 16px;
+	}
+	.visual figcaption {
+		font-size: 23px;
+	}
+	.bars {
+		margin-top: 4px;
+	}
+	.section-head {
+		display: block;
+	}
+	.search {
+		margin-top: 14px;
+	}
+	.index {
+		padding-top: 30px;
+	}
+	main {
+		padding-top: 18px;
+	}
+	.library-row {
+		gap: 13px;
+	}
+	.book-icon {
+		width: 44px;
+		height: 54px;
+		flex-shrink: 0;
+	}
+	.reader h1 {
+		font-size: 40px;
+	}
+	.paper,
+	.objective {
+		padding: 17px;
+	}
+	footer span {
+		display: none;
+	}
+	.exam-status {
+		flex-wrap: wrap;
+	}
+}
+
+.row-arrow,
+.back,
+.cream span,
+.account span {
+	font-family: system-ui, sans-serif;
+}
+
+.row-arrow {
+	width: 11px;
+	height: 11px;
+	border: solid var(--green);
+	border-width: 1.5px 1.5px 0 0;
+	transform: rotate(45deg);
+	margin-right: 8px;
+	flex-shrink: 0;
+}
+.search-icon {
+	width: 15px;
+	height: 15px;
+	border: 1.5px solid var(--muted);
+	border-radius: 50%;
+	position: relative;
+	flex-shrink: 0;
+}
+.search-icon::after {
+	content: "";
+	position: absolute;
+	width: 7px;
+	height: 1.5px;
+	background: var(--muted);
+	right: -5px;
+	bottom: -2px;
+	transform: rotate(45deg);
+}

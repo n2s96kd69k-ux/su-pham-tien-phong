@@ -1,0 +1,5 @@
+name = "su-pham-tien-phong-api"
+main = "apps/api/src/worker.ts"
+compatibility_date = "2026-01-15"
+compatibility_flags = ["nodejs_compat"]
+# Bind managed PostgreSQL through a Hyperdrive binding called HYPERDRIVE.

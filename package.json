@@ -1,0 +1,52 @@
+{
+  "name": "su-pham-tien-phong",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --config apps/web/vite.config.ts",
+    "api": "tsx --env-file-if-exists=.env apps/api/src/node.ts",
+    "db:migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
+    "db:local": "tsx scripts/local-db.ts",
+    "build:web": "vite build --config apps/web/vite.config.ts",
+    "build:api": "esbuild apps/api/src/node.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/node.mjs && wrangler deploy --dry-run --outdir dist/worker",
+    "build": "pnpm build:web && pnpm build:api",
+    "lint": "biome lint apps packages scripts tests",
+    "format": "biome format --write apps packages scripts tests",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "api:local": "tsx --env-file-if-exists=.env --env-file=.local/db.env apps/api/src/node.ts"
+  },
+  "dependencies": {
+    "@fontsource/be-vietnam-pro": "5.3.0",
+    "@fontsource/newsreader": "5.3.0",
+    "@hono/node-server": "2.1.11",
+    "@supabase/supabase-js": "2.119.2",
+    "drizzle-orm": "0.45.4",
+    "hono": "4.13.20",
+    "jose": "6.2.18",
+    "postgres": "4.1.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.6",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.8",
+    "@playwright/test": "1.65.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "embedded-postgres": "18.7.0-beta.19",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8",
+    "vitest": "^4.1.12",
+    "wrangler": "^4.166.0"
+  }
+}
