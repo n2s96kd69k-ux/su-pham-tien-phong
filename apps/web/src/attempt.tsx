@@ -1,0 +1,18 @@
+import {useEffect,useState} from 'react';
+import {Link,useParams} from 'react-router-dom';
+import type {Attempt,History} from '../../../packages/contracts';
+import {api,useResource} from './client';
+import {Status,PageTop} from './shared';
+export function Exam(){const {id}=useParams(),path='/me/attempts/'+id;const [a,set]=useState<Attempt>(),[error,setError]=useState(''),[busy,setBusy]=useState(false),[confirm,ask]=useState(false),[now,tick]=useState(Date.now());
+ useEffect(()=>{let active=true;api<Attempt>(path).then(row=>{if(active)set(row)}).catch(e=>{if(active)setError(e.message)});return ()=>{active=false}},[path]);
+ const left=a?Math.max(0,Math.ceil((Date.parse(a.deadline)-now)/1000)):0;
+ useEffect(()=>{if(!a||a.submitted_at)return;const timer=setInterval(()=>tick(Date.now()),1000);return ()=>clearInterval(timer)},[a]);
+ useEffect(()=>{if(!a||a.submitted_at||left!==0)return;let active=true;api<Attempt>(path).then(row=>{if(active)set(row)}).catch(e=>{if(active)setError(e.message)});return ()=>{active=false}},[a?.id,a?.submitted_at,left,path]);
+ if(!a)return <Status error={error}/>;
+ async function update(endpoint:string,data:unknown,method?:string){setBusy(true);setError('');try{set(await api<Attempt>(path+endpoint,data,method));ask(false)}catch(e){setError((e as Error).message+' Kiểm tra trạng thái đã lưu trước khi tiếp tục.');try{set(await api<Attempt>(path))}catch{/* Keep last confirmed state */}}finally{setBusy(false)}}
+ const missing=a.items.length-Object.keys(a.answers).length;
+ return <article className="reader"><PageTop back="/history" label="Tiến độ của tôi">{a.title}</PageTop>{a.submitted_at?<section className="objective"><h2>Kết quả · {a.score}/{a.total} điểm</h2><p>{Math.round(100*(a.score??0)/(a.total||1))}% · Đúng {a.score} · Sai {a.items.length-missing-(a.score??0)} · Bỏ trống {missing}</p></section>:<div className="exam-status"><strong>Còn {Math.floor(left/60)}:{String(left%60).padStart(2,'0')}</strong><span role="status">{busy?'Đang gửi…':'Đã lưu '+Object.keys(a.answers).length+'/'+a.items.length+' câu'}</span></div>}
+ {error&&<Status error={error}/>}
+ {a.items.map((item,i)=><fieldset key={item.id} disabled={busy||!!a.submitted_at||!left||confirm}><legend>Câu {i+1}. {item.title}</legend>{item.options.map((s,j)=><label className="option" key={s+j}><input type="radio" name={item.id} checked={a.answers[item.id]===j} onChange={()=>void update('/answers',{question:item.id,choice:j,revision:a.revision},'PUT')}/>{s}</label>)}{a.submitted_at&&<p><strong>Đáp án đúng · {item.options[item.correct??0]}</strong><br/>{item.explanation}</p>}</fieldset>)}
+ {!a.submitted_at&&(confirm?<section className="paper"><h2>Xác nhận nộp bài</h2><p>Còn {missing} câu chưa trả lời. Sau khi nộp, bài làm sẽ được chấm điểm.</p><button disabled={busy} onClick={()=>void update('/submit',{})}>Xác nhận nộp</button> <button className="plain" disabled={busy} onClick={()=>ask(false)}>Tiếp tục làm</button></section>:<button disabled={busy} onClick={()=>ask(true)}>Nộp bài</button>)}</article>}
+export function Progress(){const {data,error}=useResource<History>('/me/history');return <article className="reader"><PageTop>Tiến độ của tôi</PageTop>{!data?<Status error={error}/>:<><h2>Bài học đã hoàn thành</h2>{data.lessons.length?data.lessons.map(l=><Link className="list-link" key={l.id} to={'/lessons/'+l.id}>{l.title} ↗</Link>):<p>Bạn chưa đánh dấu hoàn thành bài học nào.</p>}<h2>Lịch sử làm bài</h2>{data.attempts.length?data.attempts.map(a=><Link key={a.id} className="list-link" to={'/attempts/'+a.id}>{a.title} · {a.score===null?'Mở bài làm':a.score+'/'+a.total+' điểm'}</Link>):<p>Chưa có bài làm. Mở một bài học để bắt đầu luyện tập.</p>}</>}</article>}
