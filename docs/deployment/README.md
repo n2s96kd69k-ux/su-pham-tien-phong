@@ -15,8 +15,8 @@ Web tĩnh, API Node và bundle Worker đã build trên máy cloud. Workflow **Pu
 Dùng project riêng cho staging. Tắt Supabase Data API nếu chỉ truy cập qua Hono. Đối chiếu quyền bảng sau khi migrate. Kiểm tra quota và điều khoản hiện hành tại tài khoản nhà cung cấp.
 
 1. Duyệt PR và kết quả Validate trước khi merge. Cấu hình Supabase, Hyperdrive, Pages và environment theo hướng dẫn iPhone.
-2. Chạy Publish staging từ main. Workflow kiểm tra cấu hình, test và build, áp dụng migration rồi deploy Worker. Nó gọi danh mục và mở một bài qua HTTPS trước khi cấp artifact cho Pages.
-3. Mở URL do Deploy Pages trả về. Thử tra bài, đăng nhập, lưu, tải lại, nộp và mở lịch sử. CORS phải trùng origin trang trong thanh địa chỉ.
+2. Chạy Publish staging từ main. Workflow kiểm tra cấu hình, test và build, áp dụng migration rồi deploy Worker. Nó gọi danh mục và mở một bài qua HTTPS để xác minh Worker staging.
+3. Mở URL của job deploy trong workflow Deploy frontend to GitHub Pages. Thử tra bài, đăng nhập, lưu, tải lại, nộp và mở lịch sử. CORS phải trùng origin trang trong thanh địa chỉ.
 4. Với Tutor, quản trị viên đặt endpoint và model trong cấu hình deploy đã duyệt, thêm secret tại Worker. Kiểm tra hạn mức nhà cung cấp và một lượt gợi ý có nguồn bài/version.
 
 ## Sự cố và chuyển host
@@ -27,3 +27,7 @@ Dùng project riêng cho staging. Tắt Supabase Data API nếu chỉ truy cập
 - Khi phát hành lỗi, dừng workflow, khôi phục phiên bản Worker trước tại Cloudflare và triển khai lại web của commit tốt. Kiểm tra tính tương thích schema. Khôi phục DB vào instance riêng để đối chiếu trước khi chuyển lưu lượng.
 - Sang Node, chạy dist/node.mjs với Node 24, production dependencies, DATABASE_URL, SUPABASE_URL và WEB_ORIGIN. Phục vụ dist/web bằng static host và build lại với VITE_API_BASE tương ứng.
 - Đối chiếu điều khoản Pages khi dùng thử. Khi chuyển sang SaaS thương mại, chuyển frontend sang static host phù hợp mô hình kinh doanh. Hạn mức và giá tùy dịch vụ và tài khoản.
+
+## GitHub Pages
+
+Trước khi merge, chọn **Settings → Pages → Build and deployment → Source → GitHub Actions**. Mỗi push vào main chạy **Deploy frontend to GitHub Pages**. Có thể chạy lại thủ công từ main. Workflow chỉ tải artifact dist/web. Nếu cần kết nối dịch vụ sau khi xuất bản, đặt VITE_API_BASE, SUPABASE_URL và SUPABASE_PUBLISHABLE_KEY tại **Settings → Secrets and variables → Actions → Variables** (cấp repository). Đây là cấu hình công khai được đóng gói vào trình duyệt. Build và kiểm tra điều hướng chạy được khi bỏ trống cả ba.
